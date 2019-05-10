@@ -4,3 +4,12 @@ header {
     color: #FFFFFF;
     text-align: center;
 }
+nav {
+    display: block;
+    width: 100%;
+    float: left;
+    text-align: center;
+    background-color: white;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
