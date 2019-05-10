@@ -13,3 +13,9 @@ nav {
     padding-top: 20px;
     padding-bottom: 20px;
 }
+a {
+    color: #F47D31;
+}
+a:hover {
+    text-decoration: underline;
+}
