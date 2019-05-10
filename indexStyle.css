@@ -13,6 +13,18 @@ nav {
     padding-top: 20px;
     padding-bottom: 20px;
 }
+nav a:link, nav a:visited {
+    display: inline;
+    border-bottom: 3px solid #fff;
+    padding: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 5px;
+}
+nav a:hover {
+    color: white;
+    background-color: #F47D31;
+}
 a {
     color: #F47D31;
 }
