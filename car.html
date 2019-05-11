@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		
+
+
+// commend + n 新建一个窗口
+// commend + s 保存
+
+
+// 记得保存的时候，命名要用。html结尾
+
+// 扩展用 tab键
+
+// 一个！号即可扩展 
+
+
+
+     // 做一个购物车程序
+     // 输入价格，数量和金额
+  var price,count,money;
+
+    // 输出变量，产品总价，找零
+
+    var total,charge;
+
+
+    // 给变量赋值
+
+    price = prompt ("请输入产品金额");
+
+   count = prompt ("输入产品数量");
+
+   // 计算出产品总计
+
+
+   total = price *count;
+
+   // 输出结果
+   console.log(total);
+
+
+   // 在网页上弹出窗口
+   alert("您的商品总计是："+total);
+
+
+
+if(total >= 500)
+{
+	alert("总价大于500，可以八折");
+	total = total * 0.8;
+}
+alert("此次消费"+total)
+
+money = prompt("收钱：");
+
+if(money >= total)
+{
+    charge = money - total;
+	alert("找零："+charge);
+	alert("感谢购物，祝您消费愉快！");
+}else{
+
+	alert("您的金额不够，请补上！");
+}
+
+
+
+	</script>
+	
+
+
+
+</body>
+</html>
