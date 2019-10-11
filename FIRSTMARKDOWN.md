@@ -10,7 +10,7 @@
 
 
 
-~~错误的不要~~~~
+~~错误的不要~~
 
 <u>只要下划线的<u></u>
 
@@ -78,7 +78,7 @@ def MyFunction():
 
 ​		
 
-[这里是我的网站](www.jxdalze.xyz)
+[这里是我的网站](http://www.jxdalze.xyz)
 
 [这里是百度](www.baidu.com)
 
@@ -102,7 +102,7 @@ def MyFunction():
 
 > **计算机使用<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Del</kbd>关机**
 >
-> <kbd></kbd>标签
+> <kbd>这就是</kbd>标签
 
 
 
