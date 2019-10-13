@@ -1,8 +1,11 @@
 # 作业 5  
+
 ## 111172   Tom 
 
 ***基于Java的多态性实现一个模拟的播放器插件程序 ***
-参考文献 李延春，软件插件技术的原理与实现，《计算机系统应用》，2003
+
+> 参考文献 李延春，软件插件技术的原理与实现，《计算机系统应用》，2003
+
 **提示:**
    > 1.宿主程序实现:可基于 Java AWT 框架搭建软件界面，由 AAPlayer、AAPFrame、AboutBox 三个 Java 类构成，AAPlayer 是整个程序的主类，负责构建 AAPFrame 类的实例，进行基本 的配置等。AAPFrame 类负责初始化音频播放器界面，选择加载音频播放插件，为相关按 钮添加事件，控制音频的播放等操作。AboutBox 用来介绍软件信息; 
 2.插件实现:模拟音频播放器的播放插件都是基于接口 IPlayerPlugin 实现的，包括 MP3PlayerPlugin、WAVPlayerPlugin、OGGPlayerPlugin 等，用户还可以根据自己的需求，去 扩展不同文件格式的播放插件。 
@@ -22,7 +25,9 @@
 >1.核心思想是插件的使用，需要自己制作jar包，利用java 的反射机制。我建了一个_plugin_包，里面声明了三个插件的class，
 
 
->2. [^ 他们继承了我的api——IPlayerGlugin，我需要声明他们，然后使用idea的导出jar包的工具 ]:注意导出流程，参考https://www.cnblogs.com/prettrywork/p/10950055.html
+>2. 他们继承了我的api——IPlayerGlugin，我需要声明他们，然后使用idea的导出jar包的工具 
+
+>> (注意导出流程，参考https://www.cnblogs.com/prettrywork/p/10950055.html)
 
 >3.之后用Build Artifacts编译一下
    
