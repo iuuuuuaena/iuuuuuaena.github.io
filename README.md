@@ -1,4 +1,4 @@
 # MyWeb
 
 
-[->]:(http://www.jxdalze.xyz)
+[->](http://www.jxdalze.xyz)
