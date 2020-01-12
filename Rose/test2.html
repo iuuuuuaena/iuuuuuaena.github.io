@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/all.css">
+    
+    <title>Test2</title>
+
+
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.css' rel='stylesheet' />
+    <!-- vue镜像 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script src = "./test2js/lineclip.js"></script>
+    <!-- 引入cheap  -->
+    <script src = "./test2js/cheap-ruler.js"></script>
+    <script src = "./test2js/test2.js"></script>
+    <script src="https://gw.alipayobjects.com/os/lib/antv/g2/3.4.10/dist/g2.min.js"></script>
+
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+
+        }
+
+        .clearfix::before,
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+
+        }
+
+        .jingdong-nav {
+            
+            width: 100%;
+            margin: 0 auto;
+            position: absolute;
+            z-index: 1000;
+            background-color: rgb(211, 211, 211);
+        }
+
+        .content {
+            width: 1010px;
+            margin: 0 auto;
+        }
+
+        .location {
+            float: left;
+            height: 40px;
+            line-height: 40px;
+
+
+        }
+
+        .content-city a:hover {
+            color: red;
+        }
+
+        .content-city {
+
+            margin: 0 auto;
+
+        }
+
+        .content-city:hover {
+            background-color: white;
+            border: 1px solidr rgba(189, 196, 196, 0.5);
+            border-bottom: none;
+        }
+
+        .menu li {
+            list-style: none;
+            float: left;
+            height: 40px;
+            line-height: 40px;
+            font-size: 16px;
+            margin: 0 20px 0 0;
+
+        }
+
+        .menu li a {
+            text-decoration: none;
+            color: rgb(94, 91, 88);
+        }
+
+        .city {
+            margin: 0 auto;
+            font-size: 17px;
+            ;
+            color: rgb(51, 51, 51);
+            text-decoration: none;
+        }
+
+        .menu {
+            float: right;
+        }
+
+        .menu li a:hover {
+            color: tomato;
+        }
+
+        .city-list {
+            width: 320px;
+            height: 300px;
+
+            border: 1px solid rgb(204, 204, 204);
+            border-top: none;
+            display: none;
+            z-index: 1000;
+        }
+
+        .location:hover .city-list {
+            display: block;
+            position: absolute;
+            background-color: white;
+            box-shadow: 2px 2px 2px rgba(189, 196, 196, 0.5);
+        }
+
+        .location:hover .content-city {
+            background-color: white;
+
+        }
+
+        .current-city {
+            border: 1px solid #000000;
+        }
+
+
+        .box1 {
+            width: 300px;
+            height: 300px;
+            background-color: #bfa;
+        }
+
+        .box2 {
+            width: 300px;
+            height: 300px;
+            position: relative;
+            top:-300px;
+            left:300px;
+           
+            background-color: rgb(39, 205, 247);
+           
+            
+        }
+
+        .box3 {
+            width: 300px;
+            height: 300px;
+            position: relative;
+            background-color: rgb(48, 201, 10);
+            top:-300px;
+        }
+
+        .box4 {
+            width: 300px;
+            height: 300px;
+            position: relative;
+            top:-600px;
+left:300px;
+            background-color: rgb(144, 26, 223);
+        }
+        
+        .my-car-list{
+            width: 300px;
+            height: 300px;
+            position:absolute;
+            background-color: rgb(223, 208, 243);
+            display: none;
+        }
+        .car-li:hover .my-car-list{
+            display: block;
+            
+        }
+        .car-li:hover .car-menu{
+            background-color: rgb(223, 208, 243);
+            color: rgb(48, 201, 10);
+            
+        }
+        #map{
+            
+            width:100%;
+            height:700px;
+            
+            border:1px solid rgba(189, 196, 196, 1);
+            background-color: #bfa;
+        }
+        #canvas{
+            position:absolute;
+            top:40px;
+            left:0px;
+            box-shadow: 0 0 10px rgba(189, 196, 196, 0.5);
+            /* background-color: rgba(255,255,255,0.4); */
+            /* background-color:rgb(226, 195, 226); */
+           
+        }
+        #rose{
+            width:300px;
+            height:600px;
+            position: absolute;
+            top:40px;
+            left:0px;
+            /* background-color: rgba(255,255,255,0.4); */
+            background-color:rgba(0, 0,0,0.1);
+            box-shadow: 0 0 10px rgba(189, 196, 196, 0.5);
+            z-index: 999;
+           
+        }
+        
+        #info{
+           
+            width:190px;
+            background-color:rgba(0, 0, 0, 0.1);
+            position: relative;
+            display:block;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(189, 196, 196, 0.8);
+            top:-60px;
+            left:105px;
+            
+        }
+        .help{
+            height:300px;
+            background-color: rgba(255, 255, 255,0.1);
+        }
+        .information{
+            position:absolute;
+            height:300px;
+            width:300px;
+            background-color: rgba(255, 255, 255,0.5);
+        }
+        .info-table{
+            margin:10px auto;
+            text-align: center;
+            height:280px;
+            width:280px;
+           
+        }
+         #x {
+            float:left;
+            height: 50px;
+            width:250px;
+            font-size: 20px;
+        }
+        #y{
+            float:left;
+            height: 50px;
+            width:250px;
+            font-size: 20px;
+        } 
+        .X{
+            text-align: center;
+            line-height: 50px;
+            float:left;
+            width:320px;
+            margin-top: 30px;
+            
+        }
+        .Y{
+            text-align: center;
+            line-height: 50px;
+            float:left;
+            width:320px;
+            margin-top: 30px;
+        }
+        .x-span{
+
+            float:left;
+            width:50px;
+        }
+        .y-span{
+            float:left;
+            width:50px;
+        }
+        .button-div{
+            margin:0 auto;
+            width:100px;
+        }
+
+        #fly{
+            
+            margin-top:  30px;
+
+            font-size: 23px;
+            line-height: 50px;
+            text-align: center;
+            width:100px;
+            height:50px;
+            border-radius: 15px;
+            background-color: rgb(119, 206, 228);
+            box-shadow: 0 0 10px rgba(189, 196, 196, 0.8);
+        }
+        #fly:hover{
+            background-color: rgb(64, 147, 168);
+        }
+
+        
+</style>
+
+
+
+</head>
+
+<body>
+    <nav class="jingdong-nav">
+
+        <div class="content clearfix">
+
+            <div class="location">
+                <div class="content-city ">
+                    <i class="fas" style="color: red;font-size: 18px;"> &#xf3c5;</i>
+                    <a class="city" href="">武汉</a>
+                </div>
+
+                <div class="city-list">
+                    <div class="X">
+                        <div class="x-span">
+                          <span class="input-group-text">X:</span>
+                        </div>
+                        <input type="text" class="form-control" id = "x">
+                      </div>
+                      <div class="Y">
+                        <div class="y-span">
+                          <span class="input-group-text">Y:</span>
+                        </div>
+                        <input type="text" class="form-control" id = "y">
+                      </div>
+                      <div class="button-div">
+                        <input type="button" id = "fly" value = "go">
+
+                      </div>
+
+                </div>
+            </div>
+
+            <ul class="menu">
+                <li>
+                    <a href="">我的主页</a>
+                </li>
+
+                <span class="tiao"></span>
+
+               
+
+               
+
+                <li>
+                    <a href="">1</a>
+                </li>
+
+                <span class="tiao"></span>
+
+                <li>
+                    <a href="">2</a>
+                </li>
+
+                <span class="tiao"></span>
+
+                <li>
+                    <a href="">3</a>
+                </li>
+                <span class="tiao"></span>
+                <li class = "car-li">
+                    <div class="car-menu">
+                        <a href="">AntV</a>
+                        <a href=""><span class="fas myarraw">&#xf107</span></a>
+                    </div>
+                    <div class="my-car-list">
+                        
+                    </div>
+                </li>
+
+                <span class="tiao"></span>
+
+                <li>
+                    <a href="">设置</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <main class="main">
+        <div id="map" ></div>
+       
+        <pre id='info' ></pre>
+        <pre id='coordinates' class='coordinates'> hhhh</pre>
+
+        <canvas id="canvas"></canvas>
+        <div id="rose">
+
+            <div class="help">
+
+            </div>
+            <div class="information">
+                    <table border="1" class="table table-dark info-table" >
+                        <thead class="thead-dark">
+                            
+                            <tr class="table-primary">
+                                <td>属性</td>
+                               
+                                <td>数值</td>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr class="table-success">
+                                <td>X</td>
+                              
+                                <td id = "rd1"></td>
+                              </tr>
+                              <tr class="table-danger">
+                                <td>Y</td>
+                             
+                                <td id = "rd2"></td>
+                              </tr>
+                              <tr class="table-info">
+                                <td>Patch</td>
+                               
+                                <td id = "rd3"></td>
+                              </tr>
+                              <tr class="table-warning">
+                                <td>Bearing</td>
+                            
+                                <td id = "rd4"></td>
+                              </tr>
+                              <tr class="table-info">
+                                <td>Zoom</td>
+                               
+                                <td id = "rd5"></td>
+                              </tr>
+                              <tr class="table-warning">
+                                <td>Post</td>
+                            
+                                <td>waniiu@126.com</td>
+                              </tr>
+                        </tbody>
+                    </table>
+
+            </div>
+        </div>
+       
+    </main>
+
+
+
+    <footer class="footer"></footer>
+    
+      <!-- 引入js文件 -->  <!-- 引入linclip -->
+      <script src = "./test2js/lineclip.js"></script>
+      <!-- 引入cheap  -->
+      <script src = "./test2js/cheap-ruler.js"></script>
+    <script src = "./test2js/test2.js"></script>
+</body>
+
+</html>
