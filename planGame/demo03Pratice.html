@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- <script src="../Vue/vue.js"></script> -->
+  
+    <!-- <link rel="stylesheet" href="../css/animate.css@3.5.1.css"> -->
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css"> 
+    
+    <style>
+        #app{
+            width: 100vw;
+            height: 100vh;
+            background:snow;
+        }
+        .main{
+            width: 40vw;
+            position: fixed;
+            top:10vh;
+            left: 30vw;
+            background: skyblue;
+            border: 10px solid  skyblue;
+            border-radius: 20px;
+
+        }
+        #plan-input{
+            margin:0 auto;
+            width: 40vw;
+            height: 40px;
+            border-radius: 10px;
+            font-size: 15px;
+           
+        }
+        
+        .checkboxs{
+            background-color: rgb(25, 218, 8);
+            line-height:33px;
+            vertical-align:middle; margin-top:0;
+            position:absolute;
+            margin:10px 10px;
+        }
+        .input-text{
+            display: block;
+            width: 35vw;
+            line-height:30px;
+            background-color: rgb(247, 242, 242);
+            position: absolute;
+            left:30px;
+            border:0px;
+        }
+        .liDiv{
+            height: 33px;
+            background-color: rgb(181, 170, 241);
+            margin:4px 0;
+            border-radius: 5px;
+        }
+        .input-button{
+            
+            position: absolute;;
+            left:38vw;
+            margin-top:8px;
+           
+        }
+    </style>
+</head>
+<body>
+<!--这个练习不错! -->
+
+    <div id="app">
+        <div class="main">
+            <input type="text" placeholder="请输入计划" v-model="plan" id = "plan-input" v-on:keyup.enter="add(plan)"  keyop.alt.67="clear">
+            <br>            <br>
+            <h2>正在计划的事情</h2>
+            <br>
+            <ol>
+                <span v-for="item,key in plans" >
+                    <div class="liDiv">
+                        <input class= "checkboxs" type="checkbox" @click="isChoosePlan(item)"><input type="text" class = "input-text" v-model="item"> <input type="button" value="X" class="input-button" @click="delPlan(item)">
+                    </div>
+                </span>
+            </ol>
+            <br>            <br>
+            <h2>已完成的事情</h2>
+            <br>
+            <ol>
+                <span v-for="item,key in haveDown" >
+                    <div class="liDiv">
+                        <input class= "checkboxs" type="checkbox" @click="isChooseHasDown(item)"><input type="text" class = "input-text" v-model="item"> <input type="button" value="X" class="input-button" @click="delHasDown(item)">
+                    </div>
+                </span>
+        </ol>
+        </div>
+    </div>
+    <script >
+        let app = new Vue({
+            el:"#app",
+            data:{
+                plan:"",
+                plans:["231","12351","#5412","1235"],
+              
+                haveDown:[]
+            },
+            methods:{
+                add:function(value){
+                    this.plans.push(value)
+                },
+                clear:function(){
+                    this.plans.splice(0,this.plans.length);
+                },
+                delPlan:function(val){
+                    var index = this.plans.indexOf(val);
+                        if (index > -1) {
+                        this.plans.splice(index, 1);
+                    }
+                },
+                delHasDown:function(val){
+                    var index = this.haveDown.indexOf(val);
+                        if (index > -1) {
+                        this.haveDown.splice(index, 1);
+                    }
+                },
+                isChoosePlan:function(item){
+                    this.haveDown.push(item)
+                    this.plans.pop(item)
+                },
+                isChooseHasDown:function(item){
+                    this.haveDown.pop(item)   
+                    this.plans.push(item)
+                }
+            },
+            watch:{
+                
+            }
+        })
+    </script>
+</body>
+</html>
