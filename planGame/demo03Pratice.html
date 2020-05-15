@@ -75,6 +75,7 @@
             <input type="text" placeholder="请输入计划" v-model="plan" id = "plan-input" v-on:keyup.enter="add(plan)"  keyop.alt.67="clear">
             <br>            <br>
             <h2>正在计划的事情</h2>
+            <p>请输入计划点击回车-> </p>
             <br>
             <ol>
                 <span v-for="item,key in plans" >
@@ -100,8 +101,7 @@
             el:"#app",
             data:{
                 plan:"",
-                plans:["231","12351","#5412","1235"],
-              
+                plans:[],
                 haveDown:[]
             },
             methods:{
