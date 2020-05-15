@@ -79,7 +79,7 @@
             <ol>
                 <span v-for="item,key in plans" >
                     <div class="liDiv">
-                        <input class= "checkboxs" type="checkbox" @click="isChoosePlan(item)"><input type="text" class = "input-text" v-model="item"> <input type="button" value="X" class="input-button" @click="delPlan(item)">
+                        <input class= "checkboxs" type="checkbox" @click="isChoosePlan(item)"><input type="text" class = "input-text" v-model="item"  v-on:keyup.enter="change(item)"> <input type="button" value="X" class="input-button" @click="delPlan(item)">
                     </div>
                 </span>
             </ol>
@@ -109,18 +109,18 @@
                     this.plans.push(value)
                 },
                 clear:function(){
-                    this.plans.splice(0,this.plans.length);
+                    this.plans.splice(0,this.plans.length)
                 },
                 delPlan:function(val){
-                    var index = this.plans.indexOf(val);
+                    var index = this.plans.indexOf(val)
                         if (index > -1) {
-                        this.plans.splice(index, 1);
+                        this.plans.splice(index, 1)
                     }
                 },
                 delHasDown:function(val){
-                    var index = this.haveDown.indexOf(val);
+                    var index = this.haveDown.indexOf(val)
                         if (index > -1) {
-                        this.haveDown.splice(index, 1);
+                        this.haveDown.splice(index, 1)
                     }
                 },
                 isChoosePlan:function(item){
@@ -130,6 +130,12 @@
                 isChooseHasDown:function(item){
                     this.haveDown.pop(item)   
                     this.plans.push(item)
+                },
+                change:function(val){
+                    var index = this.plans.indexOf(val)
+                    if (index > -1) {
+                        this.plans[index]=val
+                    }
                 }
             },
             watch:{
